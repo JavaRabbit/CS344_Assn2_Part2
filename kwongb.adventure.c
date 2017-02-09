@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 // Prototypes
@@ -20,10 +21,24 @@ int main(){
 
 void findDir(){
   DIR *dir;
+  struct dirent *sd;
+  FILE *entry_file;
+
   dir = opendir("./kwongb.rooms");
   if(dir == NULL){
     printf("no such folder\n");
     exit(1);
   }
+
+  int result;
+  while ( (sd = readdir(dir)) != NULL){
+    printf("Files are %s\n", sd->d_name);
+    result = strcmp("ALPHA", sd->d_name);
+    if(result == 0){
+      printf("this is the alpha file\n");
+    }
+
+  }
+
   closedir(dir);
 }
