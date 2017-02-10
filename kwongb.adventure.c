@@ -17,11 +17,14 @@ struct Room{
 
 // Prototypes
 void findDir();
+void createStructs();
+void createStructs2();
 
 int main(){
   printf("thello world\n");
   printf("My process id is %d\n", getpid());
   findDir();
+  createStructs();
 
   // open the right directory using stat and st_mtime
   return 0;
@@ -50,17 +53,30 @@ void findDir(){
       if(roomFile == NULL){
         printf("roomFile is  null");
       }
-      char line[50];
 
-      while(fgets(line, sizeof(line), roomFile) != NULL)
-	    {
+      char line[50];
+      char substring[10];
+      while(fgets(line, sizeof(line), roomFile) != NULL){
          printf("%s\n", line );
+         strncpy(substring, line, 8);
+         printf("%s\n", substring);
       }
 
       fclose(roomFile);
     }
 
   }
-
   closedir(dir);
+}
+
+void createStructs(){
+  struct Room baz;
+  baz.roomName = "foo bar room";
+  printf("We live in %s\n", baz.roomName);
+
+  struct Room baz2;
+  baz2.roomName = "foo bar room";
+  printf("We live in %s\n", baz2.roomName);
+  baz.connectingRooms[0] = &baz;
+  printf("baz is connected to %s\n", baz.connectingRooms[0]->roomName);
 }
