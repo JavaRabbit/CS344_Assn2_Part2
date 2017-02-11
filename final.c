@@ -75,12 +75,52 @@ void openDirCreateStructs(){
 
       // create a struct with the name of room name. Actual struct name could be anything
       struct Room baz;
-      baz.roomName = fileName;
+      baz.roomName = fileName; // because name of file is the name of the room
+      // this might change and maybe I'll use while loop to scan for room name
 
+      // declare a variable to hold a substring
+      char substring[8];
+
+      // iterate over each line of the array
       while(fgets(line, sizeof(line), roomFile) != NULL){
-         printf("Created a struct with room name: %s\n", baz.roomName);
+         //printf("Created a struct with room name: %s\n", baz.roomName);
+
+         // while loop is a place to check for connecting rooms
+         strncpy(substring, line, 7);
+         //printf("the substring is: %s\n", substring);
+
+
+         //  if the line starts with CONNECT, we add the room connection
+         int res; // to hold result of string comparison
+         result = strcmp("CONNECT", substring);
+         char newStr[10];
+         if(result ==0){
+           printf("this is a connection\n");
+           printf("the length of line is %lu\n", strlen(line));
+
+
+           int lenToCopy;
+           lenToCopy = strlen(line) - 15;  // 14 + 1 = 15
+           printf("%d is how much to copy\n", lenToCopy);
+           /*
+           char abc[] = "abcdeabcdeabcdeabcde";
+
+           char newStr[4];
+           strncpy(newStr, &abc[1], 3);   // 14 since where start of room name is
+           printf("%s\n", newStr);
+
+           */
+           //newStr[0] = '\0';
+         }
+
+
+
+         // clear the string array
+         substring[0]='\0';
 
       }
+
+      // check for room type
 
       // now that struct is complete, put it into struct array
       rooms7[structCounter] = baz;
