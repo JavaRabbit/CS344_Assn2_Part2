@@ -85,7 +85,8 @@ void openDirectories(){
       char line[50]; // this holds the actual full line read from FILE
       // declare a variable to hold a substring
       char substringForConnect[8];  // connect has 7 chars, then +1
-      char substringforRoomName[10]; // room name has 9 chars, then + 1
+      char substringForRoomName[10]; // room name has 9 chars, then + 1
+      char substringForRoomType[10]; // room type has 9 char
 
       int lenToCopy = 0; // to hold the substring to copy, eg. room name, connection
 
@@ -115,17 +116,12 @@ void openDirectories(){
 
 
 
-
-
-
-
-
         // copy the line into
-        strncpy(substringforRoomName, line, 9); //9  for "room Name"
+        strncpy(substringForRoomName, line, 9); //9  for "room Name"
 
         // if the line starts with ROOM NAME,
         int cmpWithRoomName;
-        cmpWithRoomName = strcmp("ROOM NAME", substringforRoomName);
+        cmpWithRoomName = strcmp("ROOM NAME", substringForRoomName);
 
         if(cmpWithRoomName == 0){
           //printf("THIS is the room name line\n");
@@ -140,8 +136,11 @@ void openDirectories(){
           char newStr[lenToCopy +1];
           // 11 since where start, starts at 0
           strlcpy(newStr, &line[11], lenToCopy+1);
-          printf("THe room is is:   %s\n", newStr);
+          printf("THe room NAME is:   %s\n", newStr);
         }
+
+
+
 
       } // end of while that fgets each line
 
