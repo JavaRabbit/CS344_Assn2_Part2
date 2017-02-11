@@ -141,13 +141,24 @@ void openDirectories(){
 
 
 
-         // TYPE TYPE TYPE
-        // copy the line into
-        //char bird[4];
+         // TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE
+
         // copy into substringForRoomType, starting at 0 inclusive, and put in
         // 9 chars "Room TYPE" is 9, then add 1
         strlcpy(substringForRoomType, &line[0], 10); // onl
-        printf("bird is %s\n", substringForRoomType);
+        //printf("bird is %s\n", substringForRoomType);
+
+        // if the line starts with ROOM NAME,
+        int cmpWithRoomType;
+        cmpWithRoomType = strcmp("ROOM TYPE", substringForRoomType);
+        if(cmpWithRoomType == 0){
+          printf("omg it worked\n");
+          lenToCopy = strlen(line) - 12;  // "ROOM TYPE: " is 11, then + 1
+          char typeStr[lenToCopy +1];
+          // 11 since where start, starts at 0
+          strlcpy(typeStr, &line[11], lenToCopy+2);
+          printf("THe room TYPE is:   %s\n", typeStr);
+        }
 
 
 
