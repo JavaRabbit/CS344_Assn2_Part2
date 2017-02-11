@@ -83,40 +83,40 @@ void openDirCreateStructs(){
 
       // iterate over each line of the array
       while(fgets(line, sizeof(line), roomFile) != NULL){
-         //printf("Created a struct with room name: %s\n", baz.roomName);
 
          // while loop is a place to check for connecting rooms
-         strncpy(substring, line, 7);
+         strncpy(substring, line, 7); //7 for connect
          //printf("the substring is: %s\n", substring);
 
 
          //  if the line starts with CONNECT, we add the room connection
          int res; // to hold result of string comparison
          result = strcmp("CONNECT", substring);
-         char newStr[10];
+
          if(result ==0){
            printf("this is a connection\n");
            printf("the length of line is %lu\n", strlen(line));
 
 
-           int lenToCopy;
+           int lenToCopy=0; // always initialize to 0, otherwise issues!!! of too long copy
            lenToCopy = strlen(line) - 15;  // 14 + 1 = 15
            printf("%d is how much to copy\n", lenToCopy);
-           /*
-           char abc[] = "abcdeabcdeabcdeabcde";
+           printf("%s", line); // line already has new line at end
 
-           char newStr[4];
-           strncpy(newStr, &abc[1], 3);   // 14 since where start of room name is
+           //char newStr[lenToCopy ]; // initialize a string of 1 byte larger than whats needed
+           char *newStr=(char*)malloc(sizeof(char)*lenToCopy);
+           strncpy(newStr, &line[14], lenToCopy);   // 14 since where start, starts at 0
            printf("%s\n", newStr);
 
-           */
-           //newStr[0] = '\0';
+           // clear the string array
+           free(newStr);
+
+
          }
 
 
 
-         // clear the string array
-         substring[0]='\0';
+
 
       }
 
