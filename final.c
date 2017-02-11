@@ -48,10 +48,25 @@ void openDirCreateStructs(){
       // if the file is  . or .. file, break out of while loop
       printf("this is a . file\n"); // actually should be break here
     } else {
-      printf("Files are %s\n", sd->d_name);
+      //printf("Files are %s\n", sd->d_name);
+
+      // use a varialbe fileName to store the file name
+      char fileName[10];
+      strcpy(fileName, sd->d_name);
+      //printf("The file name is %s\n", fileName);
+
+
+      // concatentate the file name with the directory for the complete file path
+      char filePath[30] = "./kwongb.rooms/";
+
+      strcat(filePath, fileName);
+      printf("%s\n", filePath);
+
+      // set the file pointer to the correct name
+      //FILE *roomFile = fopen("./kwongb.rooms/ALPHA", "r");
 
       // now that we have a file, let's read the first line and get the room name
-      
+      char line[50];
 
 
     }
