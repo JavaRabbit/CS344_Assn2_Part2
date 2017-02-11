@@ -43,9 +43,12 @@ void openDirectories(){
     exit(1);
   }
 
-  // use a while loop to loop over all files in dir
+  // this counts which file I'm interating over.
+  int fileCounter = 0;
+
+  // use a while loop to loop over all files in dir EACH FILE EACH FILE EACH FILE EACH FILE EACH FILE
   while ( (sd = readdir(dir)) != NULL){
-    printf("Files are %s\n", sd->d_name);
+    printf("File is %s\n", sd->d_name);
 
     // use strcmp to skip over . and .. files
     int result;
@@ -84,7 +87,9 @@ void openDirectories(){
       char substringForConnect[8];  // connect has 7 chars, then +1
       char substringforRoomName[10]; // room name has 9 chars, then + 1
 
-      // this actually loops over each line of the file
+      int lenToCopy = 0; // to hold the substring to copy, eg. room name, connection
+
+      // this actually loops over each line of the file    LINE LINE  LINE LINE  LINE  LINE  LINE
       while(fgets(line, sizeof(line), roomFile) != NULL){
         //printf("%s\n", line);
 
@@ -97,7 +102,7 @@ void openDirectories(){
         cmpWithConnect = strcmp("CONNECT", substringForConnect);
 
         if(cmpWithConnect == 0){
-          printf("Thisi is the connect lien\n");
+          //printf("Thisi is the connect lien\n");
         }
 
         // copy the line into
@@ -109,6 +114,18 @@ void openDirectories(){
 
         if(cmpWithRoomName == 0){
           printf("THIS is the room name line\n");
+
+          // Now lets get the room name!
+          printf("the length of line is %lu\n", strlen(line));
+          lenToCopy = strlen(line) - 12;  // "ROOM NAME: " is 11, then + 1
+          printf("%d is how much to copy\n", lenToCopy);
+
+          //char newStr[lenToCopy ]; // initialize a string of 1 byte larger than whats needed
+          //char *newStr=(char*)malloc(sizeof(char)*lenToCopy);
+          char newStr[lenToCopy +1];
+          // 11 since where start, starts at 0
+          strlcpy(newStr, &line[11], lenToCopy+1);
+          printf("THe room is is:   %s\n", newStr);
         }
 
       } // end of while that fgets each line
