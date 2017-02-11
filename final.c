@@ -36,6 +36,7 @@ void openDirCreateStructs(){
 
   // a variable for the struct array counter
   int structCounter = 0;
+    int lenToCopy = 0;
 
   while ( (sd = readdir(dir)) != NULL){
 
@@ -81,6 +82,7 @@ void openDirCreateStructs(){
       // declare a variable to hold a substring
       char substring[8];
 
+
       // iterate over each line of the array
       while(fgets(line, sizeof(line), roomFile) != NULL){
 
@@ -90,26 +92,30 @@ void openDirCreateStructs(){
 
 
          //  if the line starts with CONNECT, we add the room connection
-         int res; // to hold result of string comparison
-         result = strcmp("CONNECT", substring);
+         int fifi; // to hold result of string comparison
+         fifi = strcmp("CONNECT", substring);
 
-         if(result ==0){
+         if(fifi ==0){
            printf("this is a connection\n");
+
            printf("the length of line is %lu\n", strlen(line));
 
 
-           int lenToCopy=0; // always initialize to 0, otherwise issues!!! of too long copy
+           //int lenToCopy=0; // always initialize to 0, otherwise issues!!! of too long copy
            lenToCopy = strlen(line) - 15;  // 14 + 1 = 15
            printf("%d is how much to copy\n", lenToCopy);
            printf("%s", line); // line already has new line at end
 
            //char newStr[lenToCopy ]; // initialize a string of 1 byte larger than whats needed
-           char *newStr=(char*)malloc(sizeof(char)*lenToCopy);
-           strncpy(newStr, &line[14], lenToCopy);   // 14 since where start, starts at 0
+           //char *newStr=(char*)malloc(sizeof(char)*lenToCopy);
+           char newStr[lenToCopy +1];
+           //strncpy(newStr, &line[14], lenToCopy);   // 14 since where start, starts at 0
+           strlcpy(newStr, &line[14], lenToCopy+1);
            printf("%s\n", newStr);
 
+
            // clear the string array
-           free(newStr);
+           //free(newStr);
 
 
          }
