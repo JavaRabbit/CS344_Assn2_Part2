@@ -102,8 +102,23 @@ void openDirectories(){
         cmpWithConnect = strcmp("CONNECT", substringForConnect);
 
         if(cmpWithConnect == 0){
-          //printf("Thisi is the connect lien\n");
+          printf("Thisi is the connect lien\n");
+
+          lenToCopy = strlen(line) - 15;  // "CONNECTION 1: " is 14, then + 1
+          char newStr[lenToCopy +1];
+          strlcpy(newStr, &line[14], lenToCopy+1);
+          printf("I am connected to room:   %s\n", newStr);
         }
+
+
+
+
+
+
+
+
+
+
 
         // copy the line into
         strncpy(substringforRoomName, line, 9); //9  for "room Name"
@@ -113,12 +128,12 @@ void openDirectories(){
         cmpWithRoomName = strcmp("ROOM NAME", substringforRoomName);
 
         if(cmpWithRoomName == 0){
-          printf("THIS is the room name line\n");
+          //printf("THIS is the room name line\n");
 
           // Now lets get the room name!
-          printf("the length of line is %lu\n", strlen(line));
+          //printf("the length of line is %lu\n", strlen(line));
           lenToCopy = strlen(line) - 12;  // "ROOM NAME: " is 11, then + 1
-          printf("%d is how much to copy\n", lenToCopy);
+          //printf("%d is how much to copy\n", lenToCopy);
 
           //char newStr[lenToCopy ]; // initialize a string of 1 byte larger than whats needed
           //char *newStr=(char*)malloc(sizeof(char)*lenToCopy);
