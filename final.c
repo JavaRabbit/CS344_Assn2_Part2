@@ -8,20 +8,24 @@
 #include <time.h>
 
 
+
 struct Room{
   char *roomName;
   char *roomType;
   struct Room *connectingRooms[6]; // 6 max connections
 };
 
-struct Room rooms7[7];
+
+struct Room rooms7[8];
 
 // Prototypes
 void openDirCreateStructs();
+void fiz();
 
 int main(){
   printf("testing\n");
   openDirCreateStructs();
+  //fiz();
   return 0;
 }
 
@@ -36,7 +40,7 @@ void openDirCreateStructs(){
 
   // a variable for the struct array counter
   int structCounter = 0;
-    int lenToCopy = 0;
+  int lenToCopy = 0;
 
   while ( (sd = readdir(dir)) != NULL){
 
@@ -61,7 +65,7 @@ void openDirCreateStructs(){
       char filePath[30] = "./kwongb.rooms/";
 
       strcat(filePath, fileName);
-      printf("%s\n", filePath);
+      printf("1 This is the file path%s\n", filePath);
 
       // set the file pointer to the correct name
       FILE *roomFile = fopen(filePath, "r");
@@ -75,9 +79,19 @@ void openDirCreateStructs(){
       char line[50];
 
       // create a struct with the name of room name. Actual struct name could be anything
-      struct Room baz;
-      baz.roomName = fileName; // because name of file is the name of the room
+      //struct Room baz;
+      rooms7[structCounter].roomName = fileName; // because name of file is the name of the room
+
+      // now that struct is complete, put it into struct array
+      //rooms7[structCounter] = baz;
+      printf("Location is at %d\n", structCounter);
+      printf("Just added %s\n", rooms7[structCounter].roomName);
+      printf("Location is at %d\n", structCounter);
+      structCounter = structCounter + 1;
+
+
       // this might change and maybe I'll use while loop to scan for room name
+
 
       // declare a variable to hold a substring
       char substring[8];
@@ -117,32 +131,33 @@ void openDirCreateStructs(){
            // clear the string array
            //free(newStr);
 
-
          }
-
-
-
-
 
       }
 
       // check for room type
 
-      // now that struct is complete, put it into struct array
-      rooms7[structCounter] = baz;
-      structCounter++;
-
       // close roomFile pointer
       fclose(roomFile);
+      printf("%s is the name of array 0\n", rooms7[0].roomName);
+      printf("FILE NOW CLOSED **********\n");
+      printf("\n");
 
 
     }
 
   }
 
-  printf("the last struct is %s\n", rooms7[3].roomName);
+
 
   // close directory
   closedir(dir);
+  printf("\n FIZZZ ------\n");
+  printf("Why is this    %s\n", rooms7[0].roomName);
 
+}
+
+void fiz(){
+  printf("\n FIZZZ ------\n");
+  printf("%s\n", rooms7[1].roomName);
 }
