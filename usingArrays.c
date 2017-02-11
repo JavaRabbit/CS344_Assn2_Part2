@@ -114,10 +114,9 @@ void openDirectories(){
 
 
 
-
-
         // copy the line into
         strncpy(substringForRoomName, line, 9); //9  for "room Name"
+
 
         // if the line starts with ROOM NAME,
         int cmpWithRoomName;
@@ -138,6 +137,19 @@ void openDirectories(){
           strlcpy(newStr, &line[11], lenToCopy+1);
           printf("THe room NAME is:   %s\n", newStr);
         }
+
+
+
+
+         // TYPE TYPE TYPE
+        // copy the line into
+        //char bird[4];
+        // copy into substringForRoomType, starting at 0 inclusive, and put in
+        // 9 chars "Room TYPE" is 9, then add 1
+        strlcpy(substringForRoomType, &line[0], 10); // onl
+        printf("bird is %s\n", substringForRoomType);
+
+
 
 
 
