@@ -14,6 +14,14 @@ void openDirectories();
 void testPrint();
 
 
+struct Room{
+  char roomName[5];
+  char roomType[6];
+  struct Room *connectingRooms[6]; // 6 max connections
+};
+
+struct Room rooms7[8];
+
 int main(){
 
   //fiz();
@@ -56,6 +64,10 @@ void openDirectories(){
       printf("this is a . file\n");
     } else {
       // then file isn't . or ..
+
+      // each file needs a struct
+      struct Room baz;
+
 
       // use a varialbe fileName to store the file name
       char fileName[10];
@@ -132,8 +144,8 @@ void openDirectories(){
           // 11 since where start, starts at 0
           strlcpy(newStr, &line[11], lenToCopy+1);
           printf("THe room NAME is:   %s\n", newStr);
-
-      
+          strcpy(baz.roomName, newStr);
+          printf("From the struct, the room name is %s\n", baz.roomName);
         }
 
 
@@ -154,15 +166,23 @@ void openDirectories(){
           // 11 since where start, starts at 0
           strlcpy(typeStr, &line[11], lenToCopy+2);
           printf("THe room TYPE is:   %s\n", typeStr);
+          strcpy(baz.roomType, typeStr);
+          printf("From the struct, the TYPE is %s\n", baz.roomType);
         }
 
 
 
       } // end of while that fgets each line
 
+      // before closing the file,  add baz to the struct array
+      rooms7[fileCounter] = baz;
+
+
       fclose(roomFile);
       printf("Just closed room file \n\n");
       fileCounter = fileCounter + 1; // increment the file counter
+
+
 
     } // end of else (it isn't a . or .. file)
 
@@ -175,6 +195,7 @@ void openDirectories(){
 
 void testPrint(){
   // make some structs
+  printf("the first name is %s\n", rooms7[1].roomName);
 
 
 }
