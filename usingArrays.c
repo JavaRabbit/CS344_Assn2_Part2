@@ -13,6 +13,7 @@ void fiz();
 void setRoomsArray();
 void openDirectories();
 void testPrint();
+void startGame();
 
 // hard coded string arrays
 
@@ -27,13 +28,18 @@ char *roomNames[11] = {
 
 char *roomTypes[3] = {"START_ROOM", "MID_ROOM", "END_ROOM"};
 
+//  values possible are 0-6, but actual room name of where player is at
+// is  roomName[roooms[currentPlayerPosition][0]]
+int currentPlayerPosition = 0;
+
 int main(){
 
 
   setRoomsArray();
   //fiz();
   openDirectories();
-  testPrint();
+  //testPrint();
+  startGame();
 
   return 0;
 }
@@ -144,12 +150,6 @@ void openDirectories(){
 
 
 
-
-
-
-
-
-
         // ROOM NAME ROOM NAME  ROOM NAME  ROOM NAME  ROOM NAME
         strncpy(substringForRoomName, line, 9); //9  for "room Name"
 
@@ -238,7 +238,7 @@ void openDirectories(){
 
 void testPrint(){
 
-  printf("The value of %d\n", rooms[5][5]);
+  printf("The value of %d\n", rooms[6][7]);
 
 }
 
@@ -247,6 +247,17 @@ void setRoomsArray(){
   for(int i = 0; i < 7; i++){
     for(int j = 0; i < 8; i++){
       rooms[i][j] = -55;   // set all values to -1
+    }
+  }
+}
+
+void startGame(){
+  // first we need to find the room which is the start room
+  // iterate over each room 0-6 inclusive, and see which one has 0
+  for(int roomPos = 0; roomPos < 7; roomPos++){
+    // remember that room type lives in column [1]
+    if(rooms[roomPos][1] == 0){
+      printf("the start room is found, the room pos is %d\n", roomPos);
     }
   }
 }
