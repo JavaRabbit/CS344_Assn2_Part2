@@ -20,8 +20,8 @@ int rooms[7][8];
 
 // hard coded room Names
 char *roomNames[10] = {
-  "ALPHA", "BETA", "CHI", "four",
-  "five", "six", "seven", "eight", "nine", "ten"
+  "ALPHA", "BETA", "CHI", "FOUR",
+  "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN"
 };
 
 
@@ -212,7 +212,7 @@ void openDirectories(){
 
 void testPrint(){
 
-  printf("chi is a %d type room\n", rooms[5][1]);
+  //printf("chi is a %s type room\n", rooms[5][1]);
 
 }
 
