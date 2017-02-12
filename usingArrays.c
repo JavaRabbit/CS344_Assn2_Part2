@@ -7,27 +7,24 @@
 #include <string.h>
 #include <time.h>
 
+
 // Prototypes
 void fiz();
 void openDirectories();
-
-char *rooms[7][8];
+void testPrint();
 
 
 int main(){
 
-  printf("starting usingArrays.c\n");
-  rooms[0][0] = "room at 0 0 ";
-
-  fiz();
+  //fiz();
   openDirectories();
-
+  testPrint();
 
   return 0;
 }
 
 void fiz(){
-  printf("room at 0 0 is: %s\n", rooms[0][0]);
+
 }
 
 void openDirectories(){
@@ -114,9 +111,8 @@ void openDirectories(){
 
 
 
-        // copy the line into
+        // ROOM NAME ROOM NAME  ROOM NAME  ROOM NAME  ROOM NAME
         strncpy(substringForRoomName, line, 9); //9  for "room Name"
-
 
         // if the line starts with ROOM NAME,
         int cmpWithRoomName;
@@ -136,9 +132,9 @@ void openDirectories(){
           // 11 since where start, starts at 0
           strlcpy(newStr, &line[11], lenToCopy+1);
           printf("THe room NAME is:   %s\n", newStr);
+
+      
         }
-
-
 
 
          // TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE
@@ -162,17 +158,23 @@ void openDirectories(){
 
 
 
-
-
-
       } // end of while that fgets each line
 
       fclose(roomFile);
       printf("Just closed room file \n\n");
+      fileCounter = fileCounter + 1; // increment the file counter
+
     } // end of else (it isn't a . or .. file)
 
   }  // end of while readdir
 
   // close directory
   closedir(dir);
+}
+
+
+void testPrint(){
+  // make some structs
+
+
 }
