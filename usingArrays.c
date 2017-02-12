@@ -31,7 +31,7 @@ int main(){
 
 
   setRoomsArray();
-  fiz();
+  //fiz();
   openDirectories();
   testPrint();
 
@@ -146,6 +146,17 @@ void openDirectories(){
           strlcpy(newStr, &line[11], lenToCopy+1);
           printf("THe room NAME is:   %s\n", newStr);
 
+
+          // this for loop iterates and finds which corresponding
+          // room NAME value it is, either 0..9 or start, mid, end
+          for(int i = 0; i < 10; i++){
+            if(strcmp(newStr, roomNames[i]) == 0){
+              //  is hard coded because roomName will be at index[fileCounter][0]
+              rooms[fileCounter][0] = i;
+              printf("confirmed, the ROOM NAME is %s\n", roomNames[rooms[fileCounter][0]]);
+            }
+          }
+
         }
 
          // TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE
@@ -166,20 +177,17 @@ void openDirectories(){
           strlcpy(typeStr, &line[11], lenToCopy+2);
           printf("THe room TYPE is:   %s\n", typeStr);
 
+          // this for loop iterates and finds which corresponding
+          // room type value it is, either 0, 1, 2 or start, mid, end
           for(int i = 0; i < 3; i++){
-            int mm = strcmp(roomTypes[i], typeStr);
-            //printf("the val of roomtypes i is %s\n", roomTypes[i]);
-            //printf("the val of typeStr is %s\n", typeStr);
-
             if(strcmp(typeStr, roomTypes[i]) == 0){
               // 1 is hard coded because type is at 1
               rooms[fileCounter][1] = i;
               printf("confirmed, the type is %d\n", rooms[fileCounter][1]);
             }
-
           }
 
-        }
+        } // end cmpWithRoomType == 0
 
 
 
@@ -204,7 +212,7 @@ void openDirectories(){
 
 void testPrint(){
 
-  printf("Alpha is a %s type room\n", roomTypes[rooms[0][1]]);
+  printf("chi is a %d type room\n", rooms[5][1]);
 
 }
 
@@ -212,7 +220,7 @@ void testPrint(){
 void setRoomsArray(){
   for(int i = 0; i < 7; i++){
     for(int j = 0; i < 8; i++){
-      rooms[i][j] = -1;   // set all values to -1
+      rooms[i][j] = -55;   // set all values to -1
     }
   }
 }
