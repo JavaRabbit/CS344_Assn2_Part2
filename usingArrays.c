@@ -7,13 +7,13 @@
 #include <string.h>
 #include <time.h>
 
-
 // Prototypes
 void fiz();
 void setRoomsArray();
 void openDirectories();
 void testPrint();
 void startGame();
+void continueGame();
 void getPlayerLocation();
 
 // hard coded string arrays
@@ -41,7 +41,8 @@ int main(){
   openDirectories();
   //testPrint();
   startGame();
-  getPlayerLocation();
+  continueGame();
+  //getPlayerLocation();
 
   return 0;
 }
@@ -168,7 +169,6 @@ void openDirectories(){
           //printf("%d is how much to copy\n", lenToCopy);
 
           //char newStr[lenToCopy ]; // initialize a string of 1 byte larger than whats needed
-          //char *newStr=(char*)malloc(sizeof(char)*lenToCopy);
           char newStr[lenToCopy +1];
           // 11 since where start, starts at 0
           strlcpy(newStr, &line[11], lenToCopy+1);
@@ -265,6 +265,25 @@ void startGame(){
     }
   }
 
+}
+
+
+void continueGame(){
+  // check if at end room
+  // if not at end room, display the current location to the player
+  printf("CURRENT LOCATION: %s\n", roomNames[currentPlayerPosition+1]);
+  printf("POSSIBLE CONNECTIONS: ");
+  // loop to show all location. Might want to store into array
+  // start colIterator at 2 since its where the first match is.
+  for(int colIterator = 2; colIterator < 9; colIterator++){
+    if(rooms[currentPlayerPosition][colIterator] != 0){
+      int connectingRoom = rooms[currentPlayerPosition][colIterator];
+      printf("the connecting room value is %d\n", connectingRoom);
+      printf("%s ", roomNames[connectingRoom]);
+    }
+  }
+  //printf("SOme Locatoin");
+  printf("\nWHERE TO? >");
 }
 
 void getPlayerLocation(){
