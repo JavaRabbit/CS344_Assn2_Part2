@@ -29,8 +29,8 @@ char *roomNames[11] = {
 // rooms but be 4  types, since C array default value is 0
 char *roomTypes[4] = {"blank","START_ROOM", "MID_ROOM", "END_ROOM"};
 
-//  values possible are 0-6, but actual room name of where player is at
-// is  roomName[roooms[currentPlayerPosition][0]]
+// current player position is a int variable which holds which room
+// player is currently at.  If value is 6, then player is in roomNames[6]
 int currentPlayerPosition = 0;
 
 int main(){
@@ -40,7 +40,7 @@ int main(){
 
   openDirectories();
   //testPrint();
-  //startGame();
+  startGame();
   //continueGame();
   //getPlayerLocation();
 
@@ -251,7 +251,7 @@ void openDirectories(){
 
 void testPrint(){
 
-  printf("The value of %d\n", rooms[6][7]);
+  printf("The value of %d\n", rooms[6][6]);
 
 }
 
@@ -267,12 +267,12 @@ void setRoomsArray(){
 
 void startGame(){
   // first we need to find the room which is the start room
-  // iterate over each room 0-6 inclusive, and see which one has 0
-  for(int roomPos = 0; roomPos < 7; roomPos++){
-    // remember that room type lives in column [1]
-    if(rooms[roomPos][1] == 0){
-      printf("the start room is found, the room pos is %d\n", roomPos);
-      // now that the room 0-6 is found, aka row of array 7x8, set value
+  // iterate over each room 1-10 inclusive, and see which one has 0
+  for(int roomPos = 1; roomPos < 11; roomPos++){
+    // remember that room type lives in column [11], and startRoom is value 1
+    if(rooms[roomPos][11] == 1){
+      //printf("the start room is found, the room name is %s\n", roomNames[roomPos]);
+      // now that the room 1-10 inclusive is found, set value of currentPlayerPosition
       currentPlayerPosition = roomPos;
     }
   }
