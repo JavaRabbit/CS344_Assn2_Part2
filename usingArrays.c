@@ -102,6 +102,12 @@ void openDirectories(){
 
       int lenToCopy = 0; // to hold the substring to copy, eg. room name, connection
 
+      // instantiate a variable to hold connections.
+      // iterate over connection with roomNames 1-10 (not 0 because 0 is blankroom)
+      // the first connection goes into rooms[fileCounter][2].
+      // the last connection goes into rooms[fileCounter][7]
+      int connectionPositioner = 2;
+
       // this actually loops over each line of the file    LINE LINE  LINE LINE  LINE  LINE  LINE
       while(fgets(line, sizeof(line), roomFile) != NULL){
         //printf("%s\n", line);
@@ -114,12 +120,6 @@ void openDirectories(){
         int cmpWithConnect; // to hold result of string comparison
         cmpWithConnect = strcmp("CONNECT", substringForConnect);
 
-        // instantiate a variable to hold connections.
-        // iterate over connection with roomNames 1-10 (not 0 because 0 is blankroom)
-        // the first connection goes into rooms[fileCounter][2].
-        // the last connection goes into rooms[fileCounter][7]
-
-
         if(cmpWithConnect == 0){
           printf("Thisi is the connect lien\n");
 
@@ -127,6 +127,19 @@ void openDirectories(){
           char newStr[lenToCopy +1];
           strlcpy(newStr, &line[14], lenToCopy+1);
           printf("I am connected to room:   %s\n", newStr);
+
+          // this for loop iterates and finds which corresponding
+          // room NAME value it is, either 0..9 or start, mid, end
+          for(int i = 0; i < 11; i++){
+            if(strcmp(newStr, roomNames[i]) == 0){
+              //  is hard coded because roomName will be at index[fileCounter][0]
+              // We have a connection! connectionPositioner starts at 2
+              rooms[fileCounter][connectionPositioner] = i;
+              connectionPositioner = connectionPositioner + 1;
+              printf("therefore %s is connected to %s\n", roomNames[rooms[fileCounter][0]], roomNames[rooms[fileCounter][connectionPositioner - 1]]);
+            }
+          }
+
         }
 
 
