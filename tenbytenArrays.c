@@ -304,11 +304,34 @@ void continueGame(){
   }
   printf(".\nWHERE TO? >");
 
+  char destination[15];
+  fgets(destination, 15, stdin);
+  //destination[strlen(destination-1)] = '\0';
 
-  /*
+  printf("Before, The length of destination is %lu\n", strlen(destination));
+  // trim off new line character
+  if(strlen(destination) > 0){
+    int newLineLocation = strlen(destination) - 1;
+    destination[newLineLocation] = '\0';
+  }
+  //destination[4] = '\0';
+  printf("The length of destination is %lu\n", strlen(destination));
 
 
-  */
+
+  int cmp = strcmp(roomNames[2], destination);
+  if(cmp == 0){
+    printf("the strings match\n");
+  } else {
+    printf("nope, string does not match china\n");
+  }
+
+  //  get from destination from user.
+
+  // if destination exists, and is a valid connection, go to that room and loop
+
+
+
 }
 
 
