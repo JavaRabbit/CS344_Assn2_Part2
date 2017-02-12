@@ -154,10 +154,7 @@ void openDirectories(){
 
 
 
-
-
          // TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE
-
 
         //  Scan the each line of the file to find the line that specifies ROOM TYPE
         //  match the room type with Room Type values. Remember that
@@ -177,8 +174,6 @@ void openDirectories(){
           strlcpy(typeStr, &line[11], lenToCopy+2);
           printf("THe room TYPE is:   %s\n", typeStr);
 
-
-
           // this for loop iterates and finds which corresponding
           // room type value it is, either  1, 2 ,3 or start, mid, end
           // start i at 1 because room type names are 1,2, or 3
@@ -190,8 +185,6 @@ void openDirectories(){
             }
           }
 
-
-
         } // end cmpWithRoomType == 0
 
 
@@ -199,7 +192,7 @@ void openDirectories(){
 
 
 
-        /*
+
 
         // copy the line into substringForConnect CONECT CONNECT
         strncpy(substringForConnect, line, 7); //7 for connect
@@ -217,22 +210,24 @@ void openDirectories(){
           strlcpy(newStr, &line[14], lenToCopy+1);
           printf("I am connected to room:   %s\n", newStr);
 
+
           // this for loop iterates and finds which corresponding
           // room NAME value it is, either 0..9 or start, mid, end
-          for(int i = 0; i < 11; i++){
+          // then correctly set the
+          // start at 1 because valid roomNames start at element 1 fo roomNames array
+          for(int i = 1; i < 11; i++){
             if(strcmp(newStr, roomNames[i]) == 0){
               //  is hard coded because roomName will be at index[fileCounter][0]
               // We have a connection! connectionPositioner starts at 2
-              rooms[fileCounter][connectionPositioner] = i;
-              connectionPositioner = connectionPositioner + 1;
-              printf("therefore %s is connected to %s\n", roomNames[rooms[fileCounter][0]], roomNames[rooms[fileCounter][connectionPositioner - 1]]);
+              rooms[currentRow][i] = 55; // using 55 as a number signifying that rooms are connected
+              rooms[i][currentRow] = 55;  // if room a goes to b, then b goes to a
+              printf("therefore %s is connected to %s\n", roomNames[currentRow], roomNames[i]);
             }
           }
 
         }
 
 
-        */
 
 
       } // end of while that fgets each line
