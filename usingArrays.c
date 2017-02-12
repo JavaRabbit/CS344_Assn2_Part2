@@ -10,21 +10,28 @@
 
 // Prototypes
 void fiz();
+void setRoomsArray();
 void openDirectories();
 void testPrint();
 
+// hard coded string arrays
 
-struct Room{
-  char roomName[5];
-  char roomType[6];
-  struct Room *connectingRooms[6]; // 6 max connections
+int rooms[7][8];
+
+// hard coded room Names
+char *roomNames[10] = {
+  "ALPHA", "BETA", "CHI", "four",
+  "five", "six", "seven", "eight", "nine", "ten"
 };
 
-struct Room rooms7[8];
+
+char *roomTypes[3] = {"START ROOM", "MID ROOM", "END ROOM"};
 
 int main(){
 
-  //fiz();
+
+  setRoomsArray();
+  fiz();
   openDirectories();
   testPrint();
 
@@ -32,7 +39,7 @@ int main(){
 }
 
 void fiz(){
-
+  rooms[0][1] = 44;
 }
 
 void openDirectories(){
@@ -65,8 +72,6 @@ void openDirectories(){
     } else {
       // then file isn't . or ..
 
-      // each file needs a struct
-      struct Room baz;
 
 
       // use a varialbe fileName to store the file name
@@ -121,8 +126,6 @@ void openDirectories(){
         }
 
 
-
-
         // ROOM NAME ROOM NAME  ROOM NAME  ROOM NAME  ROOM NAME
         strncpy(substringForRoomName, line, 9); //9  for "room Name"
 
@@ -144,10 +147,8 @@ void openDirectories(){
           // 11 since where start, starts at 0
           strlcpy(newStr, &line[11], lenToCopy+1);
           printf("THe room NAME is:   %s\n", newStr);
-          strcpy(baz.roomName, newStr);
-          printf("From the struct, the room name is %s\n", baz.roomName);
-        }
 
+        }
 
          // TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE TYPE
 
@@ -160,28 +161,25 @@ void openDirectories(){
         int cmpWithRoomType;
         cmpWithRoomType = strcmp("ROOM TYPE", substringForRoomType);
         if(cmpWithRoomType == 0){
-          printf("omg it worked\n");
+
           lenToCopy = strlen(line) - 12;  // "ROOM TYPE: " is 11, then + 1
           char typeStr[lenToCopy +1];
           // 11 since where start, starts at 0
           strlcpy(typeStr, &line[11], lenToCopy+2);
           printf("THe room TYPE is:   %s\n", typeStr);
-          strcpy(baz.roomType, typeStr);
-          printf("From the struct, the TYPE is %s\n", baz.roomType);
+
         }
 
 
 
       } // end of while that fgets each line
 
-      // before closing the file,  add baz to the struct array
-      rooms7[fileCounter] = baz;
+
 
 
       fclose(roomFile);
       printf("Just closed room file \n\n");
       fileCounter = fileCounter + 1; // increment the file counter
-
 
 
     } // end of else (it isn't a . or .. file)
@@ -194,8 +192,17 @@ void openDirectories(){
 
 
 void testPrint(){
-  // make some structs
-  printf("the first name is %s\n", rooms7[1].roomName);
 
+  printf("%d is the sklfjslkjfklf\n",rooms[0][1]);
+  printf("the first room is %s\n", roomNames[1]);
 
+}
+
+// this method is going to set all value of the room array to -1
+void setRoomsArray(){
+  for(int i = 0; i < 7; i++){
+    for(int j = 0; i < 8; i++){
+      rooms[i][j] = -1;   // set all values to -1
+    }
+  }
 }
