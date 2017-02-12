@@ -14,6 +14,7 @@ void setRoomsArray();
 void openDirectories();
 void testPrint();
 void startGame();
+void getPlayerLocation();
 
 // hard coded string arrays
 
@@ -40,6 +41,7 @@ int main(){
   openDirectories();
   //testPrint();
   startGame();
+  getPlayerLocation();
 
   return 0;
 }
@@ -258,6 +260,13 @@ void startGame(){
     // remember that room type lives in column [1]
     if(rooms[roomPos][1] == 0){
       printf("the start room is found, the room pos is %d\n", roomPos);
+      // now that the room 0-6 is found, aka row of array 7x8, set value
+      currentPlayerPosition = roomPos;
     }
   }
+
+}
+
+void getPlayerLocation(){
+  printf("the player is at %d\n", currentPlayerPosition);
 }
