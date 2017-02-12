@@ -292,21 +292,22 @@ void continueGame(){
   // if not at end room, display the current location to the player
   printf("CURRENT LOCATION: %s\n", roomNames[currentPlayerPosition]);
 
-  printf("POSSIBLE CONNECTIONS: \n");
+  printf("POSSIBLE CONNECTIONS:");
 
 
   // loop to show all room connections. posConnections are from 1-10 inclusive
   // 55 is the magic number that indicates a connection to a room
   for(int posConnection = 1; posConnection < 11; posConnection++){
     if(rooms[currentPlayerPosition][posConnection] == 55){
-      printf("You can connect to %s\n", roomNames[posConnection]);
+      printf(" %s", roomNames[posConnection]);
     }
   }
+  printf(".\nWHERE TO? >");
 
 
   /*
-  //printf("SOme Locatoin");
-  printf("\nWHERE TO? >");
+
+
   */
 }
 
