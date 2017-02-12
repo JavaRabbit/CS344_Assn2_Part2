@@ -19,8 +19,8 @@ void testPrint();
 int rooms[7][8];
 
 // hard coded room Names
-char *roomNames[10] = {
-  "ALPHA", "BETA", "CHI", "FOUR",
+char *roomNames[11] = {
+  "blankroom","ALPHA", "BETA", "CHI", "FOUR",
   "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN"
 };
 
@@ -114,6 +114,12 @@ void openDirectories(){
         int cmpWithConnect; // to hold result of string comparison
         cmpWithConnect = strcmp("CONNECT", substringForConnect);
 
+        // instantiate a variable to hold connections.
+        // iterate over connection with roomNames 1-10 (not 0 because 0 is blankroom)
+        // the first connection goes into rooms[fileCounter][2].
+        // the last connection goes into rooms[fileCounter][7]
+
+
         if(cmpWithConnect == 0){
           printf("Thisi is the connect lien\n");
 
@@ -122,6 +128,13 @@ void openDirectories(){
           strlcpy(newStr, &line[14], lenToCopy+1);
           printf("I am connected to room:   %s\n", newStr);
         }
+
+
+
+
+
+
+
 
 
         // ROOM NAME ROOM NAME  ROOM NAME  ROOM NAME  ROOM NAME
@@ -149,7 +162,7 @@ void openDirectories(){
 
           // this for loop iterates and finds which corresponding
           // room NAME value it is, either 0..9 or start, mid, end
-          for(int i = 0; i < 10; i++){
+          for(int i = 0; i < 11; i++){
             if(strcmp(newStr, roomNames[i]) == 0){
               //  is hard coded because roomName will be at index[fileCounter][0]
               rooms[fileCounter][0] = i;
@@ -181,7 +194,7 @@ void openDirectories(){
           // room type value it is, either 0, 1, 2 or start, mid, end
           for(int i = 0; i < 3; i++){
             if(strcmp(typeStr, roomTypes[i]) == 0){
-              // 1 is hard coded because type is at 1
+              // 1 is hard coded because type is at column 1
               rooms[fileCounter][1] = i;
               printf("confirmed, the type is %d\n", rooms[fileCounter][1]);
             }
@@ -212,7 +225,7 @@ void openDirectories(){
 
 void testPrint(){
 
-  //printf("chi is a %s type room\n", rooms[5][1]);
+  printf("The value of %d\n", rooms[5][5]);
 
 }
 
