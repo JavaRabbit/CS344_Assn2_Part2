@@ -41,7 +41,7 @@ int main(){
   openDirectories();
   //testPrint();
   startGame();
-  //continueGame();
+  continueGame();
   //getPlayerLocation();
 
   return 0;
@@ -281,22 +281,36 @@ void startGame(){
 
 
 void continueGame(){
-  // check if at end room
+  // check if at end room, remember that room type lives at rooms[currentPlayerPosition][11]
+  // end room type is at value 3
+  if(rooms[currentPlayerPosition][11] == 3){
+    // Player is at end room and is done.  Display path to user.
+  }
+
+
+
   // if not at end room, display the current location to the player
-  printf("CURRENT LOCATION: %s\n", roomNames[currentPlayerPosition+1]);
-  printf("POSSIBLE CONNECTIONS: ");
-  // loop to show all location. Might want to store into array
-  // start colIterator at 2 since its where the first match is.
-  for(int colIterator = 2; colIterator < 9; colIterator++){
-    if(rooms[currentPlayerPosition][colIterator] != 0){
-      int connectingRoom = rooms[currentPlayerPosition][colIterator];
-      printf("the connecting room value is %d\n", connectingRoom);
-      printf("%s ", roomNames[connectingRoom]);
+  printf("CURRENT LOCATION: %s\n", roomNames[currentPlayerPosition]);
+
+  printf("POSSIBLE CONNECTIONS: \n");
+
+
+  // loop to show all room connections. posConnections are from 1-10 inclusive
+  // 55 is the magic number that indicates a connection to a room
+  for(int posConnection = 1; posConnection < 11; posConnection++){
+    if(rooms[currentPlayerPosition][posConnection] == 55){
+      printf("You can connect to %s\n", roomNames[posConnection]);
     }
   }
+
+
+  /*
   //printf("SOme Locatoin");
   printf("\nWHERE TO? >");
+  */
 }
+
+
 
 void getPlayerLocation(){
   printf("the player is at %d\n", currentPlayerPosition);
