@@ -25,7 +25,7 @@ char *roomNames[10] = {
 };
 
 
-char *roomTypes[3] = {"START ROOM", "MID ROOM", "END ROOM"};
+char *roomTypes[3] = {"START_ROOM", "MID_ROOM", "END_ROOM"};
 
 int main(){
 
@@ -71,8 +71,6 @@ void openDirectories(){
       printf("this is a . file\n");
     } else {
       // then file isn't . or ..
-
-
 
       // use a varialbe fileName to store the file name
       char fileName[10];
@@ -168,6 +166,19 @@ void openDirectories(){
           strlcpy(typeStr, &line[11], lenToCopy+2);
           printf("THe room TYPE is:   %s\n", typeStr);
 
+          for(int i = 0; i < 3; i++){
+            int mm = strcmp(roomTypes[i], typeStr);
+            //printf("the val of roomtypes i is %s\n", roomTypes[i]);
+            //printf("the val of typeStr is %s\n", typeStr);
+
+            if(strcmp(typeStr, roomTypes[i]) == 0){
+              // 1 is hard coded because type is at 1
+              rooms[fileCounter][1] = i;
+              printf("confirmed, the type is %d\n", rooms[fileCounter][1]);
+            }
+
+          }
+
         }
 
 
@@ -193,8 +204,7 @@ void openDirectories(){
 
 void testPrint(){
 
-  printf("%d is the sklfjslkjfklf\n",rooms[0][1]);
-  printf("the first room is %s\n", roomNames[1]);
+  printf("Alpha is a %s type room\n", roomTypes[rooms[0][1]]);
 
 }
 
