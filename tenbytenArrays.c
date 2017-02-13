@@ -64,9 +64,11 @@ void openDirectories(){
   struct dirent *sd;
 
   // use this string to hold the directory we'll be using. eg kwongb.rooms.12345
-  char finalDirectory[40];
+  char finalDirectory[40]={}; // initialize to all zeros
+
   strcat(finalDirectory,"./"); // file will need this
   printf("RIght now the finalDirectory is %s\n", finalDirectory);
+  printf("Right now the len of finalDirectory is %lu\n", strlen(finalDirectory));
   long int timeMS = 0; // variable to hold result of mtime
   char tmpDirHolder[35]; // a string variable to hold value of newest directory
   //   FOR GETTING CORRECT RECENT Kwongb.rooms.
@@ -112,7 +114,7 @@ void openDirectories(){
     //now that all directories have been looped through
     strcat(finalDirectory, tmpDirHolder); // add file name of newest file
     strcat(finalDirectory, "/"); // add the final backslash
-    printf("FINALLY, the newest kwongb dir is %s\n", finalDirectory);
+    printf("FINALLY, the newest kwongb dir is:%s\n", finalDirectory);
   }
 
   //  END of GETTING CORRECT RECENT
@@ -154,7 +156,7 @@ void openDirectories(){
       //char filePath[30] = "./kwongb.rooms.43075/";    // HERE !!!!!!!!!!!!! HERE!!!!!!!!
       char filePath[40];
       strcpy(filePath, finalDirectory);
-      printf("4  the filepath using the final directory is %s\n", filePath);
+      //printf("4  the filepath using the final directory is %s\n", filePath);
       strcat(filePath, fileName);
       //printf("1 This is the file path%s\n", filePath);
 
@@ -247,7 +249,7 @@ void openDirectories(){
           //strlcpy(typeStr, &line[11], lenToCopy+2);
           memcpy(typeStr, line+11 , lenToCopy+2 );
           typeStr[lenToCopy+1] = '\0'; // force null terminator at end of string
-          printf("THe room TYPE is:   %s\n", typeStr);
+          //printf("THe room TYPE is:   %s\n", typeStr);
 
           // this for loop iterates and finds which corresponding
           // room type value it is, either  1, 2 ,3 or start, mid, end
