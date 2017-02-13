@@ -36,6 +36,9 @@ int currentPlayerPosition = 0;
 
 // variable to count steps
 int stepCounter = 0;
+// array to hold roomlocations traveled through
+int travelHistory[100];
+int travelHistoryPointer = 0;
 
 int main(){
 
@@ -274,6 +277,11 @@ void startGame(){
       //printf("the start room is found, the room name is %s\n", roomNames[roomPos]);
       // now that the room 1-10 inclusive is found, set value of currentPlayerPosition
       currentPlayerPosition = roomPos;
+
+      // add current room to travel history
+      // travelHistory and increment travelHistoryPointer
+      travelHistory[travelHistoryPointer] = roomPos;
+      travelHistoryPointer++;
     }
   }
 
@@ -336,6 +344,8 @@ void continueGame(){
       // this is what actually moves the player
       currentPlayerPosition = destinationNum;  // set the player position to desired destinationNum
       stepCounter++;  // add 1 to the number of moves the player makes
+      travelHistory[travelHistoryPointer] = currentPlayerPosition;
+      travelHistoryPointer++;
       continue;  // get out of this iteration of the while loop
     } else {
       // if the code gets here means player did not enter a valid room
@@ -358,4 +368,7 @@ void getPlayerLocation(){
 void endGame(){
   printf("Congrats the game is finally over\n");
   printf("YOU TOOK %d STEPS. YOUR PATH TO VICTORY WAS:\n", stepCounter);
+  for(int i = 0; i < travelHistoryPointer; i++){
+    printf("%s\n", roomNames[travelHistory[i]]);
+  }
 }
