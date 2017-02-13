@@ -210,10 +210,11 @@ void openDirectories(){
 
           // this for loop iterates and finds which corresponding
           // room NAME value it is, either 0..9 or start, mid, end
-          for(int i = 0; i < 11; i++){
-            if(strcmp(newStr, roomNames[i]) == 0){
+          int rowIter;
+          for(int rowIter = 0; rowIter < 11; rowIter++){
+            if(strcmp(newStr, roomNames[rowIter]) == 0){
               // we've found the room. Set the currentRow
-              currentRow = i;
+              currentRow = rowIter;
               //printf("confirmed, the ROOM NAME is %s\n", roomNames[i]);
             }
           }
@@ -228,7 +229,9 @@ void openDirectories(){
         //  match the room type with Room Type values. Remember that
         //  rooms Start, Mid, and End,  correspond to 1,2,3 respectively
         //  Put the value, 1,2 or 3 value into rooms[][] column [][11] or the 12th column
-        strlcpy(substringForRoomType, &line[0], 10); // onl
+        //strlcpy(substringForRoomType, &line[0], 10); // onl
+        memcpy(substringForRoomType, line, 10);
+        substringForRoomType[9] ='\0';// force null terminator
         //printf("bird is %s\n", substringForRoomType);
 
         // if the line starts with ROOM NAME,
@@ -247,10 +250,11 @@ void openDirectories(){
           // this for loop iterates and finds which corresponding
           // room type value it is, either  1, 2 ,3 or start, mid, end
           // start i at 1 because room type names are 1,2, or 3
-          for(int i = 1; i < 4; i++){
-            if(strcmp(typeStr, roomTypes[i]) == 0){
+          int iter;
+          for(int iter = 1; iter < 4; iter++){
+            if(strcmp(typeStr, roomTypes[iter]) == 0){
               // set rooms array with  the correct roomType
-              rooms[currentRow][11] = i;
+              rooms[currentRow][11] = iter;
               //printf("confirmed, the type is %s\n", roomTypes[rooms[currentRow][11]]);
             }
           }
@@ -277,8 +281,11 @@ void openDirectories(){
 
           lenToCopy = strlen(line) - 15;  // "CONNECTION 1: " is 14, then + 1
           char newStr[lenToCopy +1];
-          strlcpy(newStr, &line[14], lenToCopy+1);
-          //printf("I am connected to room:   %s\n", newStr);
+          strlcpy(newStr, &line[14], lenToCopy+1);  // removing this strlcpy line
+          //memcpy(newStr, line+14,lenToCopy+1);
+          //newStr[lenToCopy+1] = '\0';
+
+          printf("I am connected to room:%s\n", newStr);
 
 
           // this for loop iterates and finds which corresponding
