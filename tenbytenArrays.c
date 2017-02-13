@@ -306,17 +306,16 @@ void continueGame(){
 
   char destination[15];
   fgets(destination, 15, stdin);
-  //destination[strlen(destination-1)] = '\0';
 
-  printf("Before, The length of destination is %lu\n", strlen(destination));
+
+  //printf("Before, The length of destination is %lu\n", strlen(destination));
   // trim off new line character
   if(strlen(destination) > 0){
     int newLineLocation = strlen(destination) - 1;
     destination[newLineLocation] = '\0';
   }
-  //destination[4] = '\0';
-  printf("The length of destination is %lu\n", strlen(destination));
 
+  //printf("The length of destination is %lu\n", strlen(destination));
 
 
   int cmp = strcmp(roomNames[2], destination);
@@ -326,7 +325,31 @@ void continueGame(){
     printf("nope, string does not match china\n");
   }
 
-  //  get from destination from user.
+  //  Now that the destination string is trimmed, check to see if it is a valid room
+  int mybool = 1;
+  while(mybool == 1){
+    // check destination is valid room and valid connection
+    int destinationNum = 0;
+    for(int i =1; i < 11; i++){
+      if(strcmp(destination, roomNames[i]) == 0){
+        printf("It's a real room %s\n", roomNames[i]);
+        destinationNum = i; // set the room destination number
+        mybool = 4;
+        break;
+      }
+    }
+    // now check if it is a valid connection
+    if(rooms[currentPlayerPosition][destinationNum] == 55){
+      printf("Yes, it is a valid connection\n");
+    }
+    break;
+
+    //
+
+
+
+
+  }
 
   // if destination exists, and is a valid connection, go to that room and loop
 
