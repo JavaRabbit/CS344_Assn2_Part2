@@ -202,7 +202,9 @@ void openDirectories(){
           //char newStr[lenToCopy ]; // initialize a string of 1 byte larger than whats needed
           char newStr[lenToCopy +1];
           // 11 since where start, starts at 0
-          strlcpy(newStr, &line[11], lenToCopy+1);
+          //strlcpy(newStr, &line[11], lenToCopy+1);   //***********************
+          memcpy(newStr, line +11, lenToCopy+1 );
+          newStr[lenToCopy] = '\0'; // force null terminator at end of string
           //printf("THe room NAME is:   %s\n", newStr);
 
 
@@ -237,8 +239,10 @@ void openDirectories(){
           lenToCopy = strlen(line) - 12;  // "ROOM TYPE: " is 11, then + 1
           char typeStr[lenToCopy +1];
           // 11 since where start, starts at 0
-          strlcpy(typeStr, &line[11], lenToCopy+2);
-          //printf("THe room TYPE is:   %s\n", typeStr);
+          //strlcpy(typeStr, &line[11], lenToCopy+2);
+          memcpy(typeStr, line+11 , lenToCopy+2 );
+          typeStr[lenToCopy+1] = '\0'; // force null terminator at end of string
+          printf("THe room TYPE is:   %s\n", typeStr);
 
           // this for loop iterates and finds which corresponding
           // room type value it is, either  1, 2 ,3 or start, mid, end
