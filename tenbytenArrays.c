@@ -15,6 +15,7 @@ void testPrint();
 void startGame();
 void continueGame();
 void getPlayerLocation();
+void endGame();
 
 // hard coded string arrays
 // 10 rooms + 1 is 11,  10 rooms + 1 blank + 1 column for roomType = 12
@@ -42,6 +43,7 @@ int main(){
   //testPrint();
   startGame();
   continueGame();
+  endGame();
   //getPlayerLocation();
 
   return 0;
@@ -281,84 +283,84 @@ void startGame(){
 
 
 void continueGame(){
-  // check if at end room, remember that room type lives at rooms[currentPlayerPosition][11]
-  // end room type is at value 3
-  if(rooms[currentPlayerPosition][11] == 3){
-    // Player is at end room and is done.  Display path to user.
-  }
 
-
-
-  // if not at end room, display the current location to the player
-  printf("CURRENT LOCATION: %s\n", roomNames[currentPlayerPosition]);
-
-  printf("POSSIBLE CONNECTIONS:");
-
-
-  // loop to show all room connections. posConnections are from 1-10 inclusive
-  // 55 is the magic number that indicates a connection to a room
-  for(int posConnection = 1; posConnection < 11; posConnection++){
-    if(rooms[currentPlayerPosition][posConnection] == 55){
-      printf(" %s", roomNames[posConnection]);
-    }
-  }
-  printf(".\nWHERE TO? >");
-
-  char destination[15];
-  fgets(destination, 15, stdin);
-
-
-  //printf("Before, The length of destination is %lu\n", strlen(destination));
-  // trim off new line character
-  if(strlen(destination) > 0){
-    int newLineLocation = strlen(destination) - 1;
-    destination[newLineLocation] = '\0';
-  }
-
-  //printf("The length of destination is %lu\n", strlen(destination));
-
-
-  int cmp = strcmp(roomNames[2], destination);
-  if(cmp == 0){
-    printf("the strings match\n");
-  } else {
-    printf("nope, string does not match china\n");
-  }
 
   //  Now that the destination string is trimmed, check to see if it is a valid room
   int mybool = 1;
   while(mybool == 1){
+
+    // check if at end room, remember that room type lives at rooms[currentPlayerPosition][11]
+    // end room type is at value 3
+    if(rooms[currentPlayerPosition][11] == 3){
+      // Player is at end room and is done.  Display path to user.
+      // return to end by returning to main method
+      return;
+    }
+    // if not at end room, display the current location to the player
+    printf("CURRENT LOCATION: %s\n", roomNames[currentPlayerPosition]);
+    printf("POSSIBLE CONNECTIONS:");
+
+    // loop to show all room connections. posConnections are from 1-10 inclusive
+    // 55 is the magic number that indicates a connection to a room
+    for(int posConnection = 1; posConnection < 11; posConnection++){
+      if(rooms[currentPlayerPosition][posConnection] == 55){
+        printf(" %s", roomNames[posConnection]);
+      }
+    }
+    printf(".\nWHERE TO? >");
+
+    char destination[15];
+    fgets(destination, 15, stdin);
+
+    //printf("Before, The length of destination is %lu\n", strlen(destination));
+    // trim off new line character
+    if(strlen(destination) > 0){
+      int newLineLocation = strlen(destination) - 1;
+      destination[newLineLocation] = '\0';
+    }
+
+    //printf("The length of destination is %lu\n", strlen(destination));
+
+    int cmp = strcmp(roomNames[2], destination);
+    if(cmp == 0){
+      printf("the strings match\n");
+    } else {
+      printf("nope, string does not match china\n");
+    }
+
+
     // check destination is valid room and valid connection
     int destinationNum = 0;
     for(int i =1; i < 11; i++){
       if(strcmp(destination, roomNames[i]) == 0){
         printf("It's a real room %s\n", roomNames[i]);
         destinationNum = i; // set the room destination number
-        mybool = 4;
-        break;
+        //opps set currentPlayerPosition
+        currentPlayerPosition = i;
+
       }
     }
     // now check if it is a valid connection
     if(rooms[currentPlayerPosition][destinationNum] == 55){
       printf("Yes, it is a valid connection\n");
+
+      continue;  // get out of this iteration of the while loop
     }
-    break;
-
-    //
-
-
-
+    // if the code gets here means player did not enter a valid room
+    printf("Room does not exist or is not connection\n");
+    continue;
 
   }
 
-  // if destination exists, and is a valid connection, go to that room and loop
 
-
-
-}
+} // end of continueGame
 
 
 
 void getPlayerLocation(){
   printf("the player is at %d\n", currentPlayerPosition);
+}
+
+void endGame(){
+  printf("Congrats the game is finally over\n");
 }
