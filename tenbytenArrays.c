@@ -292,12 +292,13 @@ void openDirectories(){
           // room NAME value it is, either 0..9 or start, mid, end
           // then correctly set the
           // start at 1 because valid roomNames start at element 1 fo roomNames array
-          for(int i = 1; i < 11; i++){
-            if(strcmp(newStr, roomNames[i]) == 0){
+          int posCol;
+          for(int posCol = 1; posCol < 11; posCol++){
+            if(strcmp(newStr, roomNames[posCol]) == 0){
               //  is hard coded because roomName will be at index[fileCounter][0]
               // We have a connection! connectionPositioner starts at 2
-              rooms[currentRow][i] = 55; // using 55 as a number signifying that rooms are connected
-              rooms[i][currentRow] = 55;  // if room a goes to b, then b goes to a
+              rooms[currentRow][posCol] = 55; // using 55 as a number signifying that rooms are connected
+              rooms[posCol][currentRow] = 55;  // if room a goes to b, then b goes to a
               //printf("therefore %s is connected to %s\n", roomNames[currentRow], roomNames[i]);
             }
           }
@@ -330,8 +331,9 @@ void openDirectories(){
 // this method is going to set all value of the room array to -1
 // rooms array is 11 x 12
 void setRoomsArray(){
-  for(int row = 0; row < 11; row++){
-    for(int col = 0; col < 12; col++){
+  int row, col;
+  for( row = 0; row < 11; row++){
+    for(col = 0; col < 12; col++){
       rooms[row][col] = 0;   // set all values to -1
     }
   }
@@ -340,7 +342,8 @@ void setRoomsArray(){
 void startGame(){
   // first we need to find the room which is the start room
   // iterate over each room 1-10 inclusive, and see which one has 0
-  for(int roomPos = 1; roomPos < 11; roomPos++){
+  int roomPos;
+  for(roomPos = 1; roomPos < 11; roomPos++){
     // remember that room type lives in column [11], and startRoom is value 1
     if(rooms[roomPos][11] == 1){
       //printf("the start room is found, the room name is %s\n", roomNames[roomPos]);
@@ -378,7 +381,8 @@ void continueGame(){
 
     // loop to show all room connections. posConnections are from 1-10 inclusive
     // 55 is the magic number that indicates a connection to a room
-    for(int posConnection = 1; posConnection < 11; posConnection++){
+    int posConnection;
+    for(posConnection = 1; posConnection < 11; posConnection++){
       if(rooms[currentPlayerPosition][posConnection] == 55){
         printf(" %s", roomNames[posConnection]);
       }
@@ -398,10 +402,11 @@ void continueGame(){
     // check destination is valid room and valid connection
     int destinationNum = 0;
     int boolForValidRoom= 0;
-    for(int i =1; i < 11; i++){
-      if(strcmp(destination, roomNames[i]) == 0){
+    int looper;
+    for(looper =1; looper < 11; looper++){
+      if(strcmp(destination, roomNames[looper]) == 0){
         //printf("It's a real room %s\n", roomNames[i]);
-        destinationNum = i; // set the room destination number
+        destinationNum = looper; // set the room destination number
         //opps set currentPlayerPosition
         boolForValidRoom = 1; // set this value to something arbitrary
 
