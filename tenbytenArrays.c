@@ -324,7 +324,7 @@ void continueGame(){
     int boolForValidRoom= 0;
     for(int i =1; i < 11; i++){
       if(strcmp(destination, roomNames[i]) == 0){
-        printf("It's a real room %s\n", roomNames[i]);
+        //printf("It's a real room %s\n", roomNames[i]);
         destinationNum = i; // set the room destination number
         //opps set currentPlayerPosition
         boolForValidRoom = 1; // set this value to something arbitrary
@@ -338,7 +338,7 @@ void continueGame(){
       continue;  // get out of this iteration of the while loop
     } else {
       // if the code gets here means player did not enter a valid room
-      printf("Room does not exist or is not connection\n");
+      printf("\nHUH? I DON'T UNDERSTAND THAT ROOM. TRY AGAIN\n");
       continue;
     }
 
