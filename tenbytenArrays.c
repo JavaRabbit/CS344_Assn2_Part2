@@ -56,7 +56,7 @@ void openDirectories(){
   struct dirent *sd;
 
   // open the correct directory ---FIX -------
-  dir = opendir("./kwongb.rooms");
+  dir = opendir("./kwongb.rooms.43075");
 
   if(dir == NULL){
     printf("no such folder\n");
@@ -87,7 +87,7 @@ void openDirectories(){
 
 
       // concatentate the file name with the directory for the complete file path
-      char filePath[30] = "./kwongb.rooms/";
+      char filePath[30] = "./kwongb.rooms.43075/";
 
       strcat(filePath, fileName);
       printf("1 This is the file path%s\n", filePath);
