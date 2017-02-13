@@ -297,7 +297,7 @@ void continueGame(){
       return;
     }
     // if not at end room, display the current location to the player
-    printf("CURRENT LOCATION: %s\n", roomNames[currentPlayerPosition]);
+    printf("\nCURRENT LOCATION: %s\n", roomNames[currentPlayerPosition]);
     printf("POSSIBLE CONNECTIONS:");
 
     // loop to show all room connections. posConnections are from 1-10 inclusive
@@ -312,43 +312,36 @@ void continueGame(){
     char destination[15];
     fgets(destination, 15, stdin);
 
-    //printf("Before, The length of destination is %lu\n", strlen(destination));
+
     // trim off new line character
     if(strlen(destination) > 0){
       int newLineLocation = strlen(destination) - 1;
       destination[newLineLocation] = '\0';
     }
 
-    //printf("The length of destination is %lu\n", strlen(destination));
-
-    int cmp = strcmp(roomNames[2], destination);
-    if(cmp == 0){
-      printf("the strings match\n");
-    } else {
-      printf("nope, string does not match china\n");
-    }
-
-
     // check destination is valid room and valid connection
     int destinationNum = 0;
+    int boolForValidRoom= 0;
     for(int i =1; i < 11; i++){
       if(strcmp(destination, roomNames[i]) == 0){
         printf("It's a real room %s\n", roomNames[i]);
         destinationNum = i; // set the room destination number
         //opps set currentPlayerPosition
-        currentPlayerPosition = i;
+        boolForValidRoom = 1; // set this value to something arbitrary
 
       }
     }
     // now check if it is a valid connection
-    if(rooms[currentPlayerPosition][destinationNum] == 55){
-      printf("Yes, it is a valid connection\n");
-
+    if((rooms[currentPlayerPosition][destinationNum] == 55) && (boolForValidRoom == 1)){
+      //printf("Yes, it is a valid connection\n");
+      currentPlayerPosition = destinationNum;  // set the player position to desired destinationNum
       continue;  // get out of this iteration of the while loop
+    } else {
+      // if the code gets here means player did not enter a valid room
+      printf("Room does not exist or is not connection\n");
+      continue;
     }
-    // if the code gets here means player did not enter a valid room
-    printf("Room does not exist or is not connection\n");
-    continue;
+
 
   }
 
