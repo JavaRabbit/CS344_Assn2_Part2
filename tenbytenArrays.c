@@ -72,7 +72,7 @@ void openDirectories(){
   {
     while ((dirr = readdir(d)) != NULL)
     {
-      printf("%s is a directory name!!!!!!!!!!\n", dirr->d_name);
+      //printf("%s is a directory name!!!!!!!!!!\n", dirr->d_name);
       char source[100];
       strcpy(source,dirr->d_name);
       char newStr[7];
@@ -114,7 +114,7 @@ void openDirectories(){
     result = strcmp(".", sd->d_name);
     result2 = strcmp("..", sd->d_name);
     if(result ==0 || result2 ==0 ){
-      printf("this is a . file\n");  // delete this later
+      //printf("this is a . file\n");  // delete this later
     } else {
       // then file isn't . or .., so process this file
 
@@ -128,7 +128,7 @@ void openDirectories(){
       char filePath[30] = "./kwongb.rooms.43075/";    // HERE !!!!!!!!!!!!! HERE!!!!!!!!
 
       strcat(filePath, fileName);
-      printf("1 This is the file path%s\n", filePath);
+      //printf("1 This is the file path%s\n", filePath);
 
       // set the file pointer to the correct name
       FILE *roomFile = fopen(filePath, "r");
@@ -177,7 +177,7 @@ void openDirectories(){
           char newStr[lenToCopy +1];
           // 11 since where start, starts at 0
           strlcpy(newStr, &line[11], lenToCopy+1);
-          printf("THe room NAME is:   %s\n", newStr);
+          //printf("THe room NAME is:   %s\n", newStr);
 
 
           // this for loop iterates and finds which corresponding
@@ -186,7 +186,7 @@ void openDirectories(){
             if(strcmp(newStr, roomNames[i]) == 0){
               // we've found the room. Set the currentRow
               currentRow = i;
-              printf("confirmed, the ROOM NAME is %s\n", roomNames[i]);
+              //printf("confirmed, the ROOM NAME is %s\n", roomNames[i]);
             }
           }
 
@@ -212,7 +212,7 @@ void openDirectories(){
           char typeStr[lenToCopy +1];
           // 11 since where start, starts at 0
           strlcpy(typeStr, &line[11], lenToCopy+2);
-          printf("THe room TYPE is:   %s\n", typeStr);
+          //printf("THe room TYPE is:   %s\n", typeStr);
 
           // this for loop iterates and finds which corresponding
           // room type value it is, either  1, 2 ,3 or start, mid, end
@@ -221,7 +221,7 @@ void openDirectories(){
             if(strcmp(typeStr, roomTypes[i]) == 0){
               // set rooms array with  the correct roomType
               rooms[currentRow][11] = i;
-              printf("confirmed, the type is %s\n", roomTypes[rooms[currentRow][11]]);
+              //printf("confirmed, the type is %s\n", roomTypes[rooms[currentRow][11]]);
             }
           }
 
@@ -243,12 +243,12 @@ void openDirectories(){
         cmpWithConnect = strcmp("CONNECT", substringForConnect);
 
         if(cmpWithConnect == 0){
-          printf("Thisi is the connect lien\n");
+          //printf("Thisi is the connect lien\n");
 
           lenToCopy = strlen(line) - 15;  // "CONNECTION 1: " is 14, then + 1
           char newStr[lenToCopy +1];
           strlcpy(newStr, &line[14], lenToCopy+1);
-          printf("I am connected to room:   %s\n", newStr);
+          //printf("I am connected to room:   %s\n", newStr);
 
 
           // this for loop iterates and finds which corresponding
@@ -261,7 +261,7 @@ void openDirectories(){
               // We have a connection! connectionPositioner starts at 2
               rooms[currentRow][i] = 55; // using 55 as a number signifying that rooms are connected
               rooms[i][currentRow] = 55;  // if room a goes to b, then b goes to a
-              printf("therefore %s is connected to %s\n", roomNames[currentRow], roomNames[i]);
+              //printf("therefore %s is connected to %s\n", roomNames[currentRow], roomNames[i]);
             }
           }
 
@@ -276,7 +276,7 @@ void openDirectories(){
 
 
       fclose(roomFile);
-      printf("Just closed room file \n\n");
+      //printf("Just closed room file \n\n");
       fileCounter = fileCounter + 1; // increment the file counter
 
 
