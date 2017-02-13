@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <assert.h>
+#include <pthread.h>
 
 // Prototypes
 
@@ -21,7 +23,7 @@ void endGame();
 // 10 rooms + 1 is 11,  10 rooms + 1 blank + 1 column for roomType = 12
 int rooms[11][12];
 
-// hard coded room Names
+// hard coded room Names :( remove ideally)
 char *roomNames[11] = {
   "blankroom","ALPHA", "BETA", "CHI", "FOUR",
   "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN"
@@ -50,7 +52,7 @@ int main(){
   startGame();
   continueGame();
   endGame();
-  //getPlayerLocation();
+
 
   return 0;
 }
@@ -61,8 +63,38 @@ void openDirectories(){
   DIR *dir;
   struct dirent *sd;
 
+
+  //   FOR GETTING CORRECT RECENT Kwongb.rooms.
+  DIR  *d;
+  struct dirent *dirr;
+  d = opendir(".");
+  if (d)
+  {
+    while ((dirr = readdir(d)) != NULL)
+    {
+      printf("%s is a directory name!!!!!!!!!!\n", dirr->d_name);
+      char source[100];
+      strcpy(source,dirr->d_name);
+      char newStr[7];
+      strlcpy(newStr, source, 7); // copy 6 values kwongb start at pos 0
+
+      int isKwongb = strcmp("kwongb", newStr);
+      if(isKwongb ==0){
+        printf("the substring is %s\n", newStr);
+      }
+    }
+
+    closedir(d);
+  }
+
+
+
+  //  END of GETTING CORRECT RECENT
+
+
+
   // open the correct directory ---FIX -------
-  dir = opendir("./kwongb.rooms.43075");
+  dir = opendir("./kwongb.rooms.43075");       // HERE !!!!!!!!!!!!! HERE!!!!!!!!
 
   if(dir == NULL){
     printf("no such folder\n");
@@ -93,7 +125,7 @@ void openDirectories(){
 
 
       // concatentate the file name with the directory for the complete file path
-      char filePath[30] = "./kwongb.rooms.43075/";
+      char filePath[30] = "./kwongb.rooms.43075/";    // HERE !!!!!!!!!!!!! HERE!!!!!!!!
 
       strcat(filePath, fileName);
       printf("1 This is the file path%s\n", filePath);
