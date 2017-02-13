@@ -11,7 +11,7 @@
 
 void setRoomsArray();
 void openDirectories();
-void testPrint();
+
 void startGame();
 void continueGame();
 void getPlayerLocation();
@@ -34,13 +34,16 @@ char *roomTypes[4] = {"blank","START_ROOM", "MID_ROOM", "END_ROOM"};
 // player is currently at.  If value is 6, then player is in roomNames[6]
 int currentPlayerPosition = 0;
 
+// variable to count steps
+int stepCounter = 0;
+
 int main(){
 
 
   setRoomsArray();
 
   openDirectories();
-  //testPrint();
+
   startGame();
   continueGame();
   endGame();
@@ -251,11 +254,6 @@ void openDirectories(){
 }
 
 
-void testPrint(){
-
-  printf("The value of %d\n", rooms[6][6]);
-
-}
 
 // this method is going to set all value of the room array to -1
 // rooms array is 11 x 12
@@ -283,6 +281,7 @@ void startGame(){
 
 
 void continueGame(){
+
 
 
   //  Now that the destination string is trimmed, check to see if it is a valid room
@@ -334,7 +333,9 @@ void continueGame(){
     // now check if it is a valid connection
     if((rooms[currentPlayerPosition][destinationNum] == 55) && (boolForValidRoom == 1)){
       //printf("Yes, it is a valid connection\n");
+      // this is what actually moves the player
       currentPlayerPosition = destinationNum;  // set the player position to desired destinationNum
+      stepCounter++;  // add 1 to the number of moves the player makes
       continue;  // get out of this iteration of the while loop
     } else {
       // if the code gets here means player did not enter a valid room
@@ -356,4 +357,5 @@ void getPlayerLocation(){
 
 void endGame(){
   printf("Congrats the game is finally over\n");
+  printf("YOU TOOK %d STEPS. YOUR PATH TO VICTORY WAS:\n", stepCounter);
 }
