@@ -84,7 +84,9 @@ void openDirectories(){
       char directoryName[100];
       strcpy(directoryName,dirr->d_name);
       char first12Chars[12];
-      strlcpy(first12Chars, directoryName, 12); // copy 6 values kwongb start at pos 0
+      //strlcpy(first12Chars, directoryName, 12); // copy 6 values kwongb start at pos 0
+      memcpy(first12Chars, directoryName, 12);
+      first12Chars[11]='\0'; // for the last to be a null terminator
 
       int isKwongb = strcmp("kwongb.room", first12Chars);
       if(isKwongb ==0){
@@ -285,7 +287,7 @@ void openDirectories(){
           memcpy(newStr, line+14,lenToCopy);
           newStr[lenToCopy] = '\0';
 
-          printf("I am connected to room:%s\n", newStr);
+          //printf("I am connected to room:%s\n", newStr);
 
 
           // this for loop iterates and finds which corresponding
