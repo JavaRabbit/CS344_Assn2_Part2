@@ -51,19 +51,23 @@ int main(){
   return 0;
 }
 
-
+/*
+Purpose of this method is to first find the directory to use. We use the latest
+kwongb.rooms.12345 file (depending on mtime)
+Once the directory is stored, then we iterate over each file.
+From each file, we grab the room name, connections, and room type
+*/
 void openDirectories(){
   // pointers
   DIR *dir;
   struct dirent *sd;
 
   // use this string to hold the directory we'll be using. eg kwongb.rooms.12345
-  char finalDirectory[40]={}; // initialize to all zeros
+  char finalDirectory[40]={}; // initialize to all zeros. YES NEED
 
   // append ./ to the finalDirectory since the finalDirectory will be like ./kwongb.rooms...
-  strcat(finalDirectory,"./"); 
-  printf("RIght now the finalDirectory is %s\n", finalDirectory);
-  printf("Right now the len of finalDirectory is %lu\n", strlen(finalDirectory));
+  strcat(finalDirectory,"./");
+
   long int timeMS = 0; // variable to hold result of mtime
   char tmpDirHolder[35]; // a string variable to hold value of newest directory
   //   FOR GETTING CORRECT RECENT Kwongb.rooms.
