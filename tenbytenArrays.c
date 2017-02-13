@@ -68,7 +68,7 @@ void openDirectories(){
   strcat(finalDirectory,"./"); // file will need this
   printf("RIght now the finalDirectory is %s\n", finalDirectory);
   long int timeMS = 0; // variable to hold result of mtime
-  char tmpDirHolder[50]; // a string variable to hold value of newest directory
+  char tmpDirHolder[35]; // a string variable to hold value of newest directory
   //   FOR GETTING CORRECT RECENT Kwongb.rooms.
   //  iterate over all the directories. Check that the directory / file name
   // has kwongb and numbers eg 1234 that represents the PID
@@ -118,7 +118,7 @@ void openDirectories(){
 
 
   // open the correct directory ---FIX -------
-  dir = opendir("./kwongb.rooms.43075/");       // HERE !!!!!!!!!!!!! HERE!!!!!!!!
+  dir = opendir(finalDirectory);       // HERE !!!!!!!!!!!!! HERE!!!!!!!!
 
   if(dir == NULL){
     printf("no such folder\n");
@@ -149,8 +149,10 @@ void openDirectories(){
 
 
       // concatentate the file name with the directory for the complete file path
-      char filePath[30] = "./kwongb.rooms.43075/";    // HERE !!!!!!!!!!!!! HERE!!!!!!!!
-
+      //char filePath[30] = "./kwongb.rooms.43075/";    // HERE !!!!!!!!!!!!! HERE!!!!!!!!
+      char filePath[40];
+      strcpy(filePath, finalDirectory);
+      printf("4  the filepath using the final directory is %s\n", filePath);
       strcat(filePath, fileName);
       //printf("1 This is the file path%s\n", filePath);
 
