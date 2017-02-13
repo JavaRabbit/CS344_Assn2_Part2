@@ -210,11 +210,11 @@ void openDirectories(){
 
           // this for loop iterates and finds which corresponding
           // room NAME value it is, either 0..9 or start, mid, end
-          int rowIter;
-          for(int rowIter = 0; rowIter < 11; rowIter++){
-            if(strcmp(newStr, roomNames[rowIter]) == 0){
+          int mpmm;  // crazy iterator names because C is so buggy
+          for(mpmm= 0; mpmm < 11; mpmm++){
+            if(strcmp(newStr, roomNames[mpmm]) == 0){
               // we've found the room. Set the currentRow
-              currentRow = rowIter;
+              currentRow = mpmm;
               //printf("confirmed, the ROOM NAME is %s\n", roomNames[i]);
             }
           }
@@ -250,11 +250,11 @@ void openDirectories(){
           // this for loop iterates and finds which corresponding
           // room type value it is, either  1, 2 ,3 or start, mid, end
           // start i at 1 because room type names are 1,2, or 3
-          int iter;
-          for(int iter = 1; iter < 4; iter++){
-            if(strcmp(typeStr, roomTypes[iter]) == 0){
+          int nope;
+          for(nope = 1; nope < 4; nope++){
+            if(strcmp(typeStr, roomTypes[nope]) == 0){
               // set rooms array with  the correct roomType
-              rooms[currentRow][11] = iter;
+              rooms[currentRow][11] = nope;
               //printf("confirmed, the type is %s\n", roomTypes[rooms[currentRow][11]]);
             }
           }
@@ -293,7 +293,7 @@ void openDirectories(){
           // then correctly set the
           // start at 1 because valid roomNames start at element 1 fo roomNames array
           int posCol;
-          for(int posCol = 1; posCol < 11; posCol++){
+          for(posCol = 1; posCol < 11; posCol++){
             if(strcmp(newStr, roomNames[posCol]) == 0){
               //  is hard coded because roomName will be at index[fileCounter][0]
               // We have a connection! connectionPositioner starts at 2
