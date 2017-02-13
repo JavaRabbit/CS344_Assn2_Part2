@@ -442,7 +442,8 @@ void getPlayerLocation(){
 void endGame(){
   printf("Congrats the game is finally over\n");
   printf("YOU TOOK %d STEPS. YOUR PATH TO VICTORY WAS:\n", stepCounter);
-  for(int i = 0; i < travelHistoryPointer; i++){
-    printf("%s\n", roomNames[travelHistory[i]]);
+  int counter;
+  for(counter= 0; counter < travelHistoryPointer; counter++){
+    printf("%s\n", roomNames[travelHistory[counter]]);
   }
 }
