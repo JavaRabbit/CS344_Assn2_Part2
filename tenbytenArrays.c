@@ -63,7 +63,12 @@ void openDirectories(){
   DIR *dir;
   struct dirent *sd;
 
-
+  // use this string to hold the directory we'll be using. eg kwongb.rooms.12345
+  char finalDirectory[40];
+  strcat(finalDirectory,"./"); // file will need this
+  printf("RIght now the finalDirectory is %s\n", finalDirectory);
+  long int timeMS = 0; // variable to hold result of mtime
+  char tmpDirHolder[50]; // a string variable to hold value of newest directory
   //   FOR GETTING CORRECT RECENT Kwongb.rooms.
   //  iterate over all the directories. Check that the directory / file name
   // has kwongb and numbers eg 1234 that represents the PID
@@ -72,6 +77,7 @@ void openDirectories(){
   d = opendir(".");
   if (d)
   {
+
     while ((dirr = readdir(d)) != NULL)
     {
       //printf("%s is a directory name!!!!!!!!!!\n", dirr->d_name);
@@ -83,11 +89,28 @@ void openDirectories(){
       int isKwongb = strcmp("kwongb.room", first12Chars);
       if(isKwongb ==0){
         printf("the substring is %s and the file path is %s\n", first12Chars, directoryName);
-        //
+
+        //  now that we have only directories that start with kwongb.rooms.nnnnn
+        // find the newest directory
+
+        struct stat buf;
+        stat(directoryName, &buf);
+
+        printf("st_mode for this file is = %ld \n", buf.st_mtime);
+
+        if(buf.st_mtime > timeMS){
+          timeMS  = buf.st_mtime;  // set timeMS to newer file
+          strcpy(tmpDirHolder,directoryName);
+        }
       }
-    }
+    } // end of the while loop
 
     closedir(d);
+
+    //now that all directories have been looped through
+    strcat(finalDirectory, tmpDirHolder); // add file name of newest file
+    strcat(finalDirectory, "/"); // add the final backslash
+    printf("FINALLY, the newest kwongb dir is %s\n", finalDirectory);
   }
 
   //  END of GETTING CORRECT RECENT
@@ -95,7 +118,7 @@ void openDirectories(){
 
 
   // open the correct directory ---FIX -------
-  dir = opendir("./kwongb.rooms.43075");       // HERE !!!!!!!!!!!!! HERE!!!!!!!!
+  dir = opendir("./kwongb.rooms.43075/");       // HERE !!!!!!!!!!!!! HERE!!!!!!!!
 
   if(dir == NULL){
     printf("no such folder\n");
