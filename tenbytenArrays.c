@@ -65,6 +65,8 @@ void openDirectories(){
 
 
   //   FOR GETTING CORRECT RECENT Kwongb.rooms.
+  //  iterate over all the directories. Check that the directory / file name
+  // has kwongb and numbers eg 1234 that represents the PID
   DIR  *d;
   struct dirent *dirr;
   d = opendir(".");
@@ -73,21 +75,20 @@ void openDirectories(){
     while ((dirr = readdir(d)) != NULL)
     {
       //printf("%s is a directory name!!!!!!!!!!\n", dirr->d_name);
-      char source[100];
-      strcpy(source,dirr->d_name);
-      char newStr[7];
-      strlcpy(newStr, source, 7); // copy 6 values kwongb start at pos 0
+      char directoryName[100];
+      strcpy(directoryName,dirr->d_name);
+      char first12Chars[12];
+      strlcpy(first12Chars, directoryName, 12); // copy 6 values kwongb start at pos 0
 
-      int isKwongb = strcmp("kwongb", newStr);
+      int isKwongb = strcmp("kwongb.room", first12Chars);
       if(isKwongb ==0){
-        printf("the substring is %s\n", newStr);
+        printf("the substring is %s and the file path is %s\n", first12Chars, directoryName);
+        //
       }
     }
 
     closedir(d);
   }
-
-
 
   //  END of GETTING CORRECT RECENT
 
