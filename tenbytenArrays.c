@@ -281,9 +281,9 @@ void openDirectories(){
 
           lenToCopy = strlen(line) - 15;  // "CONNECTION 1: " is 14, then + 1
           char newStr[lenToCopy +1];
-          strlcpy(newStr, &line[14], lenToCopy+1);  // removing this strlcpy line
-          //memcpy(newStr, line+14,lenToCopy+1);
-          //newStr[lenToCopy+1] = '\0';
+          //strlcpy(newStr, &line[14], lenToCopy+1);  // removing this strlcpy line
+          memcpy(newStr, line+14,lenToCopy);
+          newStr[lenToCopy] = '\0';
 
           printf("I am connected to room:%s\n", newStr);
 
